@@ -1,16 +1,16 @@
 <template>
   <div class="main">
-    <span class="title">{{name}}</span>
-    <div id="line"></div>
+    <span class="title">{{ name }}</span>
+    <div id="line" />
   </div>
 </template>
 
 <script>
-import {defineComponent, ref, onMounted} from "vue";
+import { defineComponent, ref, onMounted } from 'vue'
 import lineData from '../../mock/bar'
 import { Chart } from '@antv/g2'
 export default defineComponent({
-  name: "Line",
+  name: 'Line',
   setup() {
     const name = ref('折线图')
     /**
@@ -25,52 +25,52 @@ export default defineComponent({
         container: 'line', // 指定图表容器 ID
         width: 800, // 指定图表宽度
         height: 300, // 指定图表高度
-        padding: [50, 20, 50, 20], // 可自定义添加间距
+        padding: [50, 20, 50, 20] // 可自定义添加间距
         // autoFit: true, // 是否自动居中，可不需要width
-      });
-      chart.data(lineData);
+      })
+      chart.data(lineData)
       chart.scale('value', { // 绘制文字
-        alias: '销售额(万)',
-      });
+        alias: '销售额(万)'
+      })
       chart.axis('type', { // 定义xy轴
         tickLine: {
-          alignTick: false,
-        },
-      });
-      chart.axis('value', false);
+          alignTick: false
+        }
+      })
+      chart.axis('value', false)
 
       chart.tooltip({
-        showMarkers: false,
-      });
-      chart.interval().position('type*value');
-      chart.interaction('element-active');
+        showMarkers: false
+      })
+      chart.interval().position('type*value')
+      chart.interaction('element-active')
       /**
        * 此处是在柱状图的位置处进行添加文本
        */
       lineData.forEach((item) => {
         chart
-            .annotation()
-            .text({
-              position: [item.type, item.value],
-              content: item.value,
-              style: {
-                textAlign: 'center',
-              },
-              offsetY: -30,
-            })
-            .text({
-              position: [item.type, item.value],
-              content: (item.percent * 100).toFixed(0) + '%',
-              style: {
-                textAlign: 'center',
-              },
-              offsetY: -12,
-            });
-      });
-      chart.render();
+          .annotation()
+          .text({
+            position: [item.type, item.value],
+            content: item.value,
+            style: {
+              textAlign: 'center'
+            },
+            offsetY: -30
+          })
+          .text({
+            position: [item.type, item.value],
+            content: (item.percent * 100).toFixed(0) + '%',
+            style: {
+              textAlign: 'center'
+            },
+            offsetY: -12
+          })
+      })
+      chart.render()
     })
     return {
-      name,
+      name
     }
   }
 })

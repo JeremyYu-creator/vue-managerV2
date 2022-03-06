@@ -8,20 +8,20 @@
 
 <!--设置成中文形式的element组件-->
 <script lang="ts">
-import { ElConfigProvider, } from 'element-plus'
+import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
-import { defineComponent, } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {
-    [ElConfigProvider.name]: ElConfigProvider,
+    [ElConfigProvider.name]: ElConfigProvider
   },
-  data () {
+  data() {
     return {
-      locale: zhCn,
+      locale: zhCn
     }
-  },
-},)
+  }
+})
 </script>
 <style>
 #app {

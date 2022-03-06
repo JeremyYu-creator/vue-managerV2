@@ -1,30 +1,29 @@
 <template>
   <div class="main">
     <el-header>
-      <Header/>
+      <Header />
     </el-header>
     <el-container>
-      <Aside/>
+      <Aside />
       <el-main>
         <div style="margin-top: 30px">
-          <router-view/>
+          <router-view />
         </div>
       </el-main>
     </el-container>
   </div>
 </template>
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
-import Aside from "../components/layout/Aside.vue";
-import Header from "../components/layout/HeaderComponent.vue";
+import { defineComponent } from 'vue'
+import Aside from '../components/layout/Aside.vue'
+import Header from '../components/layout/HeaderComponent.vue'
 export default defineComponent({
   name: 'show',
-  components:{
+  components: {
     Header,
-    Aside,
+    Aside
   },
   setup() {
-
     return {
 
     }

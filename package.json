@@ -19,13 +19,22 @@
     "stylus": "^0.56.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.13",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-vue": "^6.2.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",
+    "babel-eslint": "^10.1.0",
     "commitizen": "^4.2.4",
     "commitlint": "^16.2.1",
     "conventional-changelog-cli": "^2.2.2",
+    "eslint": "^6.8.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^7.0.4",
     "less": "^4.1.2",

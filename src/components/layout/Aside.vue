@@ -3,34 +3,34 @@
     <el-row class="tac">
       <el-col>
         <el-menu
-            default-active="1"
-            class="el-menu-vertical-demo"
-            :unique-opened="true"
+          default-active="1"
+          class="el-menu-vertical-demo"
+          :unique-opened="true"
         >
           <template v-for="item in setArr" :key="item.value">
             <el-sub-menu :index="item.index">
-            <template #title>
-              <el-icon><location/></el-icon>
-              <span>{{item.title}}</span>
-            </template>
-            <el-sub-menu :index="item.subIndex" v-if="item.subArr.length > 0">
               <template #title>
-                <div class="horizontal">
-                  {{item.subName}}
-                </div>
+                <el-icon><location /></el-icon>
+                <span>{{ item.title }}</span>
               </template>
-              <el-menu-item :index="iitem.thirdIndex"  v-for="iitem in item.subArr" :key="iitem.value">
-                <div class="horizontal" @click="jumpTo(iitem.thirdIndex)">
-                  {{iitem.thirdName}}
+              <el-sub-menu v-if="item.subArr.length > 0" :index="item.subIndex">
+                <template #title>
+                  <div class="horizontal">
+                    {{ item.subName }}
+                  </div>
+                </template>
+                <el-menu-item v-for="iitem in item.subArr" :key="iitem.value" :index="iitem.thirdIndex">
+                  <div class="horizontal" @click="jumpTo(iitem.thirdIndex)">
+                    {{ iitem.thirdName }}
+                  </div>
+                </el-menu-item>
+              </el-sub-menu>
+              <el-menu-item v-else :index="item.subIndex">
+                <div class="horizontal" @click="jumpTo(item.subIndex)">
+                  {{ item.subName }}
                 </div>
               </el-menu-item>
             </el-sub-menu>
-            <el-menu-item :index="item.subIndex" v-else>
-              <div class="horizontal" @click="jumpTo(item.subIndex)">
-                {{item.subName}}
-              </div>
-            </el-menu-item>
-          </el-sub-menu>
           </template>
         </el-menu>
       </el-col>
@@ -43,21 +43,21 @@ import {
   Location,
   Document,
   Menu as IconMenu,
-  Setting,
+  Setting
 } from '@element-plus/icons-vue'
-import routePath from "../../utils/routePath";
+import routePath from '../../utils/routePath'
 import RouteType from '../../type/routePath'
-import {useRouter} from "vue-router";
+import { useRouter } from 'vue-router'
 export default defineComponent({
   name: 'show',
-  components:{
+  components: {
     Location,
     Document,
     IconMenu,
-    Setting,
+    Setting
   },
   data() {
-    return {// 尝试性封装左侧tab标题
+    return { // 尝试性封装左侧tab标题
       setArr: [ // 设计结构时会考虑有几层，这种数据结构比较符合树形的结构；不同的是，树形的会使用递归；这里的考虑写成固定的
         {
           title: '第一级',
@@ -67,9 +67,9 @@ export default defineComponent({
           subArr: [
             {
               thirdIndex: '1-1-1',
-              thirdName: '第三级一',
-            },
-          ],
+              thirdName: '第三级一'
+            }
+          ]
         },
         {
           title: '第二级',
@@ -79,21 +79,21 @@ export default defineComponent({
           subArr: [
             {
               thirdIndex: '2-1-1',
-              thirdName: '第三级一',
+              thirdName: '第三级一'
             },
             {
               thirdIndex: '2-1-2',
-              thirdName: '第三极二',
-            },
-          ],
+              thirdName: '第三极二'
+            }
+          ]
         },
         {
           title: '第三极',
           index: '3',
           subIndex: '3-1',
           subName: '第二级',
-          subArr: [],
-        },
+          subArr: []
+        }
       ]
     }
   },
@@ -101,16 +101,16 @@ export default defineComponent({
     const count = ref(0)
     const router = useRouter()
     const jumpTo = (path: string) => {
-        routePath.forEach((item: RouteType) => {
-          if(item.index === path || item.subIndex === path || item.thirdIndex === path) {
-            // 基于实际场景的话很可能不是固定有三级菜单，因此可能到二级就结束了，所以要充足判断一级到三级的点击路径
-            router.push({name: item.name})
-          }
-        })
+      routePath.forEach((item: RouteType) => {
+        if (item.index === path || item.subIndex === path || item.thirdIndex === path) {
+          // 基于实际场景的话很可能不是固定有三级菜单，因此可能到二级就结束了，所以要充足判断一级到三级的点击路径
+          router.push({ name: item.name })
+        }
+      })
     }
     return {
       count,
-      jumpTo,
+      jumpTo
     }
   }
 

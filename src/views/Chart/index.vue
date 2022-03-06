@@ -1,16 +1,16 @@
 <template>
   <div class="main">
-    <Bar/>
+    <Bar />
   </div>
 </template>
 
 <script>
-import {defineComponent} from "vue";
+import { defineComponent } from 'vue'
 import Bar from './Bar.vue'
 export default defineComponent({
-  name: "index",
+  name: 'index',
   components: {
-    Bar,
+    Bar
   },
   setup() {
 

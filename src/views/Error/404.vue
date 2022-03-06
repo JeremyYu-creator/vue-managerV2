@@ -2,49 +2,55 @@
   <div class="wscn-http404-container">
     <div class="wscn-http404">
       <div class="pic-404">
-        <img class="pic-404__parent" :src="four" alt="404" />
-        <img class="pic-404__child left" :src="four_cloud" alt="404" />
-        <img class="pic-404__child mid" :src="four_cloud" alt="404" />
-        <img class="pic-404__child right" :src="four_cloud" alt="404" />
+        <img class="pic-404__parent" :src="four" alt="404">
+        <img class="pic-404__child left" :src="four_cloud" alt="404">
+        <img class="pic-404__child mid" :src="four_cloud" alt="404">
+        <img class="pic-404__child right" :src="four_cloud" alt="404">
       </div>
       <div class="bullshit">
-        <div class="bullshit__oops">VUE3 Admin</div>
-        <div class="bullshit__headline">{{ message }}</div>
+        <div class="bullshit__oops">
+          VUE3 Admin
+        </div>
+        <div class="bullshit__headline">
+          {{ message }}
+        </div>
         <div class="bullshit__info">
           Please check that the URL you entered is correct, or click the button
           below to return to the homepage.
         </div>
-        <div class="bullshit__return-home" @click="toAbout">Back to home</div>
+        <div class="bullshit__return-home" @click="toAbout">
+          Back to home
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from "vue";
-import four from "../../assets/404.png";
-import four_cloud from "../../assets/404_cloud.png";
-import { useRouter } from "vue-router";
-import {defineComponent} from "vue";
+import { computed } from 'vue'
+import four from '../../assets/404.png'
+import four_cloud from '../../assets/404_cloud.png'
+import { useRouter } from 'vue-router'
+import { defineComponent } from 'vue'
 export default defineComponent({
-  name: "404",
+  name: '404',
   setup() {
     const router = useRouter()
     const message = computed(() => {
-      return "The webmaster said that you can not enter this page...";
-    });
+      return 'The webmaster said that you can not enter this page...'
+    })
     const toAbout = () => {
-      router.push({ name: "Home" });
-    };
+      router.push({ name: 'Home' })
+    }
 
     return {
       message,
       four,
       four_cloud,
-      toAbout,
-    };
-  },
-});
+      toAbout
+    }
+  }
+})
 </script>
 
 <style lang="stylus" scoped>

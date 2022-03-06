@@ -5,4 +5,3 @@ export interface RouteType {
     thirdIndex: string,
 }
 
-
