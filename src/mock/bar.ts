@@ -1,4 +1,4 @@
-const barData = [
+const BarData = [
   { type: '未知', value: 654, percent: 0.02 },
   { type: '17 岁以下', value: 654, percent: 0.02 },
   { type: '18-24 岁', value: 4400, percent: 0.2 },
@@ -8,4 +8,4 @@ const barData = [
   { type: '50 岁以上', value: 1500, percent: 0.06 }
 ]
 
-export default barData
+export default BarData

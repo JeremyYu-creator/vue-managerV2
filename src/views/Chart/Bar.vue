@@ -1,7 +1,8 @@
 <template>
   <div class="main">
-    <span class="title">{{ name }}</span>
-    <div id="line" />
+    <div class="chart-style">
+      <div id="bar" />
+    </div>
   </div>
 </template>
 
@@ -12,7 +13,6 @@ import { Chart } from '@antv/g2'
 export default defineComponent({
   name: 'Bar',
   setup() {
-    const name = ref('折线图')
     /**
        * 普通绘图步骤:
        * 1、创建chart实例；
@@ -22,11 +22,11 @@ export default defineComponent({
        */
     onMounted(() => {
       const chart = new Chart({
-        container: 'line', // 指定图表容器 ID
+        container: 'bar', // 指定图表容器 ID
         width: 800, // 指定图表宽度
-        height: 300, // 指定图表高度
-        padding: [50, 20, 50, 20] // 可自定义添加间距
-        // autoFit: true, // 是否自动居中，可不需要width
+        height: 500, // 指定图表高度
+        padding: [50, 20, 50, 20], // 可自定义添加间距
+        autoFit: true // 是否自动居中，可不需要width
       })
       chart.data(barData)
       chart.scale('value', { // 绘制文字
@@ -70,7 +70,6 @@ export default defineComponent({
       chart.render()
     })
     return {
-      name
     }
   }
 })
@@ -81,6 +80,10 @@ export default defineComponent({
 .main{
   .title{
     margin-bottom: 30px;
+  }
+  .chart-style{
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

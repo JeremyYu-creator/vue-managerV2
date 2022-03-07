@@ -46,7 +46,7 @@ import {
   Setting
 } from '@element-plus/icons-vue'
 import routePath from '../../utils/routePath'
-import RouteType from '../../type/routePath'
+import { RouteType } from '../../type/routePath'
 import { useRouter } from 'vue-router'
 export default defineComponent({
   name: 'show',

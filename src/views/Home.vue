@@ -38,4 +38,8 @@ export default defineComponent({
     margin-left: 20px;
   }
 }
+.el-container{
+  border: 1px solid black;
+  border-radius: 40px;
+}
 </style>
