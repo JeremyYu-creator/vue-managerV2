@@ -69,6 +69,6 @@ export default defineComponent({
 <style scoped lang="sass">
 .home
   padding: 10px
-  border: 1px solid #909399
+  border: 1px solid #c8c9cc
   border-radius: 5px
 </style>
