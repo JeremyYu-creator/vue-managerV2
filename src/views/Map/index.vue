@@ -3,26 +3,54 @@
     <!--上方各种设置配置-->
     <div class="block-style">
       <div class="block-item">
-        <el-button>查询城市</el-button>
+        <el-tag size="large">查询城市</el-tag>
         <el-input v-model="aimPlace"></el-input>
         <el-button @click="searchPlace">搜索</el-button>
       </div>
+      <el-card class="weather-notice">
+        <notice :notice="notice" @showData="showData"></notice>
+        <el-input v-model="textValue" placeholder="请输入传值内容"></el-input>
+        <el-button @click="save">保存</el-button>
+      </el-card>
     </div>
     <!--缺少loading加载-->
-    <div id="map" class="map-style"></div>
+    <div>
+      <div id="map" class="map-style"></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, onBeforeMount, defineComponent } from "vue";
+import {ref, onBeforeMount, defineComponent, reactive, provide, onUnmounted} from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import { ElMessage } from "element-plus";
+import Notice from '../../components/extra/notice.vue'
+import { textSymbol, reloadSymbol } from "../../symbol/text"
+import mitter from '../../utils/mitt'
+// import Notice from '../../components/'
 
 export default defineComponent({
   name: "mapShow",
+  components:{
+    Notice
+  },
   setup() {
     const load: any = ref(null); // 创建一个全局的地图实例，方便加入各种plugins，无需多次声明
-    const map: any = ref(null);
+    const map: any = ref(null)
+    const notice = ref('')
+    const text = '111'
+    const textValue = ref('')
+    const save = () => {
+      notice.value = textValue.value
+      console.log('098765')
+    }
+    const showData = (num: number) => {
+      console.log(num)
+    }
+    mitter.on('mittEvent', (msg) => {
+      console.log('发送数据',msg)
+    })
+    provide(textSymbol, textValue)
     onBeforeMount(async () => {// 在这里直接进行图形的相关方法定义
       try {
         load.value = await AMapLoader.load({
@@ -69,7 +97,7 @@ export default defineComponent({
           // 显示当前路段的交通情况
           zIndex: 10,
         });
-        map.value.add(trafficLayer);
+        map.value.add(trafficLayer)
         map.value.addControl(geolocation);
         geolocation.getCurrentPosition((status: string, result: any) => {
           if (status === "complete") {
@@ -84,13 +112,19 @@ export default defineComponent({
           // 默认是北京市，可以后续考虑根据当前定位在哪儿显示当前城市的地图和天气
           // 获取该城市的当前天气情况
           console.log(err, data);
+          Object.keys(weatherInfo).forEach((item:any) =>{
+            console.log(item)
+              weatherInfo[item] = data[item]
+          })
+          console.log(weatherInfo)
           // console.log(getInfo.value);
         });
         weather.getForecast("北京市", function (err: any, data: any) {
           // 获取该城市未来的天气状况
           console.log(err, data);
         });
-        } catch (e: any) {
+        }
+        catch (e: any) {
         console.log(e)
       }
     });
@@ -99,24 +133,47 @@ export default defineComponent({
       map.value.setCity(aimPlace.value);
       ElMessage.success(`已跳转到${aimPlace.value}`);
     }
+    const weatherInfo = reactive({
+      temperature: 0,
+      city:'',
+      province:'',
+      reportTime: '',
+      weather: '',
+      windDirection:'',
+      windPower: '',
+    })
+    onUnmounted(() => {
+      mitter.off(reloadSymbol, save)
+    })
     return {
         aimPlace,
         searchPlace,
+        notice,
+        textValue,
+        save,
+        text,
+        showData
     };
   },
 });
 </script>
 <style lang="stylus" scoped>
 .container
-  width 1374px
-  height 700px
+  width 1140px
+  height 480px
   .map-style
-    width: 100%;
-    height: 100%;
+    width 1140px
+    height 480px
   .block-style
+    width 100%
+    margin-bottom 15px
+    display flex
+    justify-content space-between
     .block-item
       display flex
       align-items center
       width 20%
       margin 10px
+    .weather-notice
+      font-size 14px
 </style>

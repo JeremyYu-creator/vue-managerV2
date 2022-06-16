@@ -6,7 +6,7 @@
     <el-container>
       <Aside />
       <el-main>
-        <div style="margin-top: 30px">
+        <div style="height:550px">
           <router-view />
         </div>
       </el-main>
@@ -32,14 +32,22 @@ export default defineComponent({
 })
 
 </script>
-<style scoped lang="scss">
+<style scoped lang="less">
 .main{
   .text{
     margin-left: 20px;
   }
 }
 .el-container{
-  border: 1px solid black;
-  border-radius: 40px;
+  // border: 1px solid black;
+  // border-radius: 40px;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+}
+.el-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 5px;
 }
 </style>

@@ -38,7 +38,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent, watch } from 'vue'
 import {
   Location,
   Document,
@@ -47,7 +47,7 @@ import {
 } from '@element-plus/icons-vue'
 import routePath from '../../utils/routePath'
 import { RouteType } from '../../type/routePath'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 export default defineComponent({
   name: 'show',
   components: {
@@ -100,7 +100,11 @@ export default defineComponent({
   setup() {
     const count = ref(0)
     const router = useRouter()
+    const route = useRoute()
+    console.log(route.matched)
+    const pathText = ref('')
     const jumpTo = (path: string) => {
+      pathText.value = path
       routePath.forEach((item: RouteType) => {
         if (item.index === path || item.subIndex === path || item.thirdIndex === path) {
           // 基于实际场景的话很可能不是固定有三级菜单，因此可能到二级就结束了，所以要充足判断一级到三级的点击路径
@@ -108,6 +112,9 @@ export default defineComponent({
         }
       })
     }
+    watch(pathText, (n, o) => {
+      console.log(n, o, '变化了')
+    })
     return {
       count,
       jumpTo

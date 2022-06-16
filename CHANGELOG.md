@@ -1,9 +1,10 @@
-## 0.0.1 (2022-03-11)
+## 0.0.1 (2022-06-16)
 
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
  - | 图形渲染模块完成 | [8d022d4](https://github.com/JeremyYu-creator/vue-managerV2/commit/8d022d4)
+ - | 新增请求方法及地图迁移一半 | [64e9582](https://github.com/JeremyYu-creator/vue-managerV2/commit/64e9582)
  - | 增减lint规则，规范代码书写 | [7976320](https://github.com/JeremyYu-creator/vue-managerV2/commit/7976320)
 
 

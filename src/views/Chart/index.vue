@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Brother/>
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
       <el-tab-pane v-for="item in labelList" :key="item.value" :label="item.label" :name="item.name">
         {{ item.title }}
@@ -18,13 +19,15 @@ import Bar from './Bar.vue'
 import Line from './Line.vue'
 import Pie from './Pie.vue'
 import Radar from './Radar.vue'
+import Brother from '../../components/extra/brother.vue'
 export default defineComponent({
   name: 'index',
   components: {
     Bar,
     Line,
     Pie,
-    Radar
+    Radar,
+    Brother
   },
   data() {
     return {
